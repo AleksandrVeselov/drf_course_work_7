@@ -2,6 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from spa.models import Habit
+from spa.paginators import HabitPaginator
 from spa.serializers import HabitSerializer
 
 
@@ -10,6 +11,7 @@ class HabitListAPIView(generics.ListAPIView):
 
     serializer_class = HabitSerializer  # Сериализатор
     permission_classes = [IsAuthenticated]  # Только для авторизованных пользователей
+    pagination_class = HabitPaginator  # пагинатор
 
     def get_queryset(self):
         """Фильтрация привычек текущего пользователя"""
@@ -24,6 +26,7 @@ class PublicHabitListAPIView(generics.ListAPIView):
     serializer_class = HabitSerializer  # Сериализатор
     queryset = Habit.objects.filter(is_public=True)  # фильтр
     permission_classes = [IsAuthenticated]  # Только для авторизованных пользователей
+    pagination_class = HabitPaginator  # пагинатор
 
 
 class HabitCreateAPIView(generics.CreateAPIView):
