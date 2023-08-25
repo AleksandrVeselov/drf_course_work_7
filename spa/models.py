@@ -6,7 +6,10 @@ NULLABLE = {'null': True, 'blank': True}  # для необязательног�
 
 class Habit(models.Model):
     """Модель привычки"""
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Пользователь', on_delete=models.CASCADE)  # TODO автоматическое добавление
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             verbose_name='Пользователь',
+                             on_delete=models.CASCADE,
+                             **NULLABLE)  # TODO автоматическое добавление
     place = models.CharField(max_length=255, verbose_name='Место')  # место выполнения привычки
     habit_time = models.TimeField()  # Время, когда необходимо выполнить привычку
     action = models.CharField(max_length=255, verbose_name='Действие')  # действие для привычки
