@@ -144,3 +144,10 @@ EMAIL_USE_SSL = True
 AUTH_USER_MODEL = 'users.User'  # Кастомная модель пользователя
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
+

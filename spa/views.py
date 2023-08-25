@@ -10,10 +10,11 @@ class HabitListAPIView(generics.ListAPIView):
     """Класс-представление для отображения списка привычек текущего пользователя"""
 
     serializer_class = HabitSerializer  # Сериализатор
+    queryset = Habit.objects.all()
 
-    def get_queryset(self):
-        queryset = Habit.objects.filter(user=self.request.user)
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Habit.objects.filter(user=self.request.user)
+    #     return queryset
 
 
 class PublicHabitListAPIView(generics.ListAPIView):
@@ -27,28 +28,29 @@ class HabitCreateAPIView(generics.CreateAPIView):
     """Класс-представление для создания привычки на основе generics"""
     serializer_class = HabitSerializer
 
-    def perform_create(self, serializer):
-        """Добавление пользователя создаваемой привычке"""
-
-        new_habit = serializer.save()  # сохранение привычки
-        new_habit.user = self.request.user  # добавляем пользователя
-        new_habit.save()
+    # def perform_create(self, serializer):
+    #     """Добавление пользователя создаваемой привычке"""
+    #
+    #     new_habit = serializer.save()  # сохранение привычки
+    #     new_habit.user = self.request.user  # добавляем пользователя
+    #     new_habit.save()
 
 
 class HabitUpdateAPIView(generics.UpdateAPIView):
     """Класс-представление для обновления привычки на основе generics"""
     serializer_class = HabitSerializer
-
-    def get_queryset(self):
-        queryset = Habit.objects.filter(user=self.request.user)
-        return queryset
+    queryset = Habit.objects.all()
+    # def get_queryset(self):
+    #     queryset = Habit.objects.filter(user=self.request.user)
+    #     return queryset
 
 
 class HabitDestroyAPIView(generics.DestroyAPIView):
     """Класс-представление для удаления привычки на основе generics"""
+    queryset = Habit.objects.all()
 
-    def get_queryset(self):
-        queryset = Habit.objects.filter(user=self.request.user)
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Habit.objects.filter(user=self.request.user)
+    #     return queryset
 
-
+# TODO добавить авторизацию пользователя и валидаторы, протестировать валидаторы и авторизацию
