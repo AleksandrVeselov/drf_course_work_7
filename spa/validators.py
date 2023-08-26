@@ -3,6 +3,7 @@ from datetime import timedelta
 from rest_framework.exceptions import ValidationError
 
 from spa.models import Habit
+from spa.tasks import check_habits
 
 
 class ExecutionTimeValidator:
@@ -13,6 +14,7 @@ class ExecutionTimeValidator:
 
     def __call__(self, value):
         models_dict = dict(value)  # словарь из полей модели
+        check_habits()
         execution_time = models_dict.get(self.field)  # значение времени выполнения
         if execution_time > timedelta(seconds=120):
             raise ValidationError('Время выполнения привычки не должно превышать 120 секунд')
