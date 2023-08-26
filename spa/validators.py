@@ -49,9 +49,9 @@ class IsPleasantValidator:
         self.field = field
 
     def __call__(self, value):
-
+        is_pleasant = dict(value).get(self.field)  # проверяем значение is_pleasant
         # если привычка приятная (is_pleasant=True)
-        if self.field:
+        if is_pleasant:
             award = dict(value).get('award')  # наличие вознаграждения
             related_habit = dict(value).get('related_habit')  # наличие связанной привычки
             if award or related_habit:
