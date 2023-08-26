@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_celery_beat',
     'drf_yasg',
+    'corsheaders',
 
     'users',
     'spa'
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -155,3 +157,12 @@ CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 
 # ключ для telegram
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_SECRET_KEY')
+
+# Настройки для cors
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://read-and-write.example.com",
+]
