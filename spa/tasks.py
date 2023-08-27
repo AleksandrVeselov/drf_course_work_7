@@ -23,4 +23,4 @@ def check_habits():
 
         # если время привычки равно текущему времени без учета секунд
         if habit_time == current_time:
-            print(habit)
+            send_telegram_message(habit)

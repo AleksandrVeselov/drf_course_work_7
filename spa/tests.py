@@ -70,23 +70,24 @@ class HabitTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)  # проверяем статус ответа
 
         self.assertEqual(Habit.objects.all().count(), 3)  # проверяем наличия в базе данных новой записи
-    #
-    # def test_update_habit(self):
-    #     """тестирование эндпоинта изменения привычки"""
-    #     data = {'place': 'спортплощадка обновленная',
-    #             'habit_time': '07:00',
-    #             'action': 'Зарядка',
-    #             'is_pleasant': False,
-    #             'periodicity': 1,
-    #             'related_habit': self.pleasant_habit.pk,
-    #             'execution_time': '120',
-    #             'user': self.user.pk
-    #             }
-    #
-    #     response = self.client.put(reverse('spa:update_habit', args=[self.habit.pk]), data=data)
-    #
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)  # Проверка статуса ответа
-    #     self.assertEqual(self.habit.place, 'спортплощадка обновленная')
+
+    def test_update_habit(self):
+        """тестирование эндпоинта изменения привычки"""
+        data = {'place': 'спортплощадка обновленная',
+                'habit_time': '07:00',
+                'action': 'Зарядка_1',
+                'is_pleasant': False,
+                'periodicity': 1,
+                'related_habit': self.pleasant_habit.pk,
+                'execution_time': '120',
+                'user': self.user.pk
+                }
+
+        response = self.client.patch(reverse('spa:update_habit', args=[self.habit.pk]), data=data)
+        self.habit.refresh_from_db()
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)  # Проверка статуса ответа
+        self.assertEqual(self.habit.place, 'спортплощадка обновленная')
 
     def test_list_habits(self):
         """Тестирование эндпоинта отображения списка привычек"""
