@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -154,6 +155,8 @@ REST_FRAMEWORK = {
 # Настройки celery
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+CELERY_BEAT_SCHEDULE = {'check_habits': {'task': 'spa.tasks.check_habits',
+                        'schedule': timedelta(minutes=1)}}  # периодичность выполнения задачи 1 раз в минуту
 
 # ключ для telegram
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_SECRET_KEY')
