@@ -1,8 +1,9 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from celery import shared_task
 
 from spa.models import Habit
+from spa.utils import send_telegram_message
 
 
 @shared_task
@@ -23,4 +24,18 @@ def check_habits():
 
         # если время привычки равно текущему времени без учета секунд
         if habit_time == current_time:
-            send_telegram_message(habit)
+
+            # Если привычка никогда не выполнялась
+            if not habit.last_execution_time:
+                send_telegram_message(habit)  # вызов функции отправки сообщения
+                habit.last_execution_time = datetime.now(timezone.utc)
+                habit.save()
+            else:
+                # вычисляем количество дней с момента последнего выполнения привычки
+                days_from_last_execution = datetime.now(timezone.utc) - habit.last_execution_time
+
+                # если оно совпадает с периодичностью привычки отправляем напоминание
+                if days_from_last_execution.days == habit.periodicity:
+                    send_telegram_message(habit)  # вызов функции отправки сообщения
+
+

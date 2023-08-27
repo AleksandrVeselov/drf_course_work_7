@@ -23,3 +23,4 @@ class Habit(models.Model):
                              **NULLABLE)  # вознаграждение за выполнение привычки
     execution_time = models.DurationField(verbose_name='Время выполнения')  # время, потраченное на выполнение привычки
     is_public = models.BooleanField(default=False, verbose_name='Публичность')  # признак публичности
+    last_execution_time = models.DateTimeField(**NULLABLE, verbose_name='Время последнего выполнения привычки')
