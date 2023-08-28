@@ -16,5 +16,4 @@ def send_telegram_message(habit):
     data = {'chat_id': '396295095', 'text': text}  # данные для формирования url
 
     # отправка сообщения пользователю
-    response = requests.post(f'https://api.telegram.org/bot{token}/sendMessage?', data=data)
-
+    requests.post(f'https://api.telegram.org/bot{token}/sendMessage?', data=data)

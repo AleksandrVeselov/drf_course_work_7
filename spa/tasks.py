@@ -37,5 +37,3 @@ def check_habits():
                 # если оно совпадает с периодичностью привычки отправляем напоминание
                 if days_from_last_execution.days == habit.periodicity:
                     send_telegram_message(habit)  # вызов функции отправки сообщения
-
-
