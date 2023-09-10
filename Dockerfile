@@ -5,7 +5,7 @@ FROM python:3
 WORKDIR /course_work8
 
 # копируем файл с зависимостями пректа в рабочую директорию
-COPY ./requirements.txt /course_work/
+COPY ./requirements.txt /course_work8/
 
 # запускаем установку зависимостей
 RUN pip install -r requirements.txt
