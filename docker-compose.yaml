@@ -48,5 +48,6 @@ services:
     depends_on:
       - redis
       - celery
+      - app
 volumes:
   pg_data:
