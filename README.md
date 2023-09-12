@@ -61,13 +61,13 @@
 Запустить проект командой: docker-compose up --build -d
 Попробовать в браузере открыть страницу с документацией http://localhost:8000/swagger/ или http://localhost:8000/redoc/
 Начать работать с проектом через Postman
-Технологии, используемые в проекте:
 
-DRF
-Docker
-Postgres
-Celery и Celery-beat
-Redis
-Telegram
+Технологии, используемые в проекте:
+- DRF
+- Docker
+- Postgres
+- Celery и Celery-beat
+- Redis
+- Telegram
 
 Автор проекта - Веселов Александр Сергеевич
