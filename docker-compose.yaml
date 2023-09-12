@@ -7,8 +7,10 @@ services:
       - '6380:6379'
   db:
     image: postgres
+    env_file:
+      - .env
     environment:
-      - POSTGRES_PASSWORD=postgres
+#      - POSTGRES_PASSWORD=postgres
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - pg_data:/var/lib/postgresql/data/pgdata
@@ -37,14 +39,14 @@ services:
     tty: True
     command: celery -A config worker -l info
     depends_on:
-      - redis
-      - app
+      db:
+        condition: service_healthy
   celery_beat:
     build: .
     tty: True
     command: celery -A config beat -S django
     depends_on:
       - redis
-      - app
+      - celery
 volumes:
   pg_data:
